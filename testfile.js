@@ -28,6 +28,8 @@ function finalValidator(req, res, next) {
 
     //our result is the value of data[rule.field]
     const result = eval(objectevaluation);
+    console.log(objectevaluation);
+    console.log(result);
     //if no result, we know the field doesn't exist
     if (!result && result !== null && typeof result !== "boolean") {
       return res.status(400).json({
@@ -161,9 +163,34 @@ function ruleValidate(ruleField, ruleCondition, dataValue, ruleValue, res) {
       },
     });
   } else {
-    const ruleValidated = eval(
-      `${dataValue}${operations[ruleCondition]}${ruleValue}`
-    );
+    let ruleValidated;
+    if (typeof dataValue === typeof ruleValue) {
+      if (typeof dataValue === "object") {
+        return res.status(400).json({
+          message: `field ${ruleField} failed validation`,
+          status: "error",
+          data: {
+            validation: {
+              error: true,
+              field: `${ruleField}`,
+              field_value: dataValue,
+              condition: ruleCondition,
+              condition_value: ruleValue,
+            },
+          },
+        });
+      }
+      if (typeof dataValue === "string") {
+        ruleValidated = eval(
+          `"${dataValue}"${operations[ruleCondition]}"${ruleValue}"`
+        );
+      } else {
+        ruleValidated = eval(
+          `${dataValue}${operations[ruleCondition]}${ruleValue}`
+        );
+      }
+    }
+
     console.log(ruleValidated);
     if (ruleValidated) {
       return res.status(200).json({

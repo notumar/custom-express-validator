@@ -32,14 +32,6 @@ function validator(req, res, next) {
     });
   }
 
-  if (checkType(data)) {
-    return res.status(400).json({
-      message: "rule should be an object.",
-      status: "error",
-      data: null,
-    });
-  }
-
   //Create an object to check type(wahala for who no use typescript tbh)
   const ruleFields = {
     field: "string",
