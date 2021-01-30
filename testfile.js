@@ -167,7 +167,7 @@ function ruleValidate(ruleField, ruleCondition, dataValue, ruleValue, res) {
     if (typeof dataValue === typeof ruleValue) {
       if (typeof dataValue === "object") {
         return res.status(400).json({
-          message: `field ${ruleField} failed validation`,
+          message: `field ${ruleField} failed validation.`,
           status: "error",
           data: {
             validation: {
@@ -208,7 +208,7 @@ function ruleValidate(ruleField, ruleCondition, dataValue, ruleValue, res) {
       });
     } else {
       return res.status(400).json({
-        message: `field ${ruleField} failed validation`,
+        message: `field ${ruleField} failed validation.`,
         status: "error",
         data: {
           validation: {
