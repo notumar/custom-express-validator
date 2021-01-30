@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
     status: "success",
     data: {
       name: "AhmedTijani Umar",
-      github: "@ahmedtiani",
+      github: "@ahmedtijani",
       email: "ahmedtijaniumar@gmail.com",
       mobile: "08063662344",
       twitter: "@hmedtijani",
